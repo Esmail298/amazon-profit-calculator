@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Profit Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            margin-top: 15px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Amazon Profit Calculator</h2>
+    <label>Selling Price ($)</label>
+    <input type="number" id="price" placeholder="Enter selling price">
+
+    <label>Product Cost ($)</label>
+    <input type="number" id="cost" placeholder="Enter product cost">
+
+    <label>Shipping Cost ($)</label>
+    <input type="number" id="shipping" placeholder="Enter shipping cost">
+
+    <label>Amazon FBA Fees ($)</label>
+    <input type="number" id="fba" placeholder="Enter FBA fees">
+
+    <label>Other Expenses ($)</label>
+    <input type="number" id="other" placeholder="Enter other expenses">
+
+    <button onclick="calculateProfit()">Calculate Profit</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+</div>
+
+<script>
+    function calculateProfit() {
+        let price = parseFloat(document.getElementById('price').value) || 0;
+        let cost = parseFloat(document.getElementById('cost').value) || 0;
+        let shipping = parseFloat(document.getElementById('shipping').value) || 0;
+        let fba = parseFloat(document.getElementById('fba').value) || 0;
+        let other = parseFloat(document.getElementById('other').value) || 0;
+
+        let totalCost = cost + shipping + fba + other;
+        let profit = price - totalCost;
+        let margin = (profit / price) * 100;
+
+        let resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+
+        if (profit > 0) {
+            resultDiv.style.background = '#28a745'; // Green
+            resultDiv.innerHTML = `Profit: $${profit.toFixed(2)} <br> Margin: ${margin.toFixed(2)}%`;
+        } else {
+            resultDiv.style.background = '#dc3545'; // Red
+            resultDiv.innerHTML = `Loss: $${profit.toFixed(2)} <br> Margin: ${margin.toFixed(2)}%`;
+        }
+    }
+</script>
+
+</body>
+</html>
