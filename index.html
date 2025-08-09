@@ -3,109 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Profit Calculator</title>
+    
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="qUSF0wZKLgfu9cG9SZaqQHsgDGib2tvWw66bhqPjVyQ" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Amazon Profit Calculator - Free Amazon FBA Fee & ROI Tool</title>
+    <meta name="description" content="Easily calculate your Amazon FBA profit, fees, and ROI with our free Amazon profit calculator. Perfect for Amazon sellers worldwide.">
+    <meta name="keywords" content="Amazon Profit Calculator, Amazon FBA calculator, Amazon fee calculator, Amazon ROI calculator, FBA profit tool, Amazon seller tools">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            margin: 0;
+            background-color: #f4f4f4;
             padding: 20px;
         }
-        .container {
-            max-width: 500px;
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .calculator {
+            max-width: 400px;
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
         input {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
+            padding: 8px;
+            margin: 5px 0 15px 0;
             border-radius: 5px;
+            border: 1px solid #ccc;
         }
         button {
-            background: #28a745;
+            background-color: #28a745;
             color: white;
             padding: 10px;
             border: none;
-            margin-top: 15px;
-            width: 100%;
             border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background: #218838;
+            background-color: #218838;
         }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 1.2em;
-            text-align: center;
-            color: white;
+        p {
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Amazon Profit Calculator</h2>
-    <label>Selling Price ($)</label>
-    <input type="number" id="price" placeholder="Enter selling price">
+    <h1>Amazon Profit Calculator</h1>
+    <p style="text-align:center;">Use our free Amazon Profit Calculator to find out your FBA profit, fees, and ROI instantly.</p>
 
-    <label>Product Cost ($)</label>
-    <input type="number" id="cost" placeholder="Enter product cost">
+    <div class="calculator">
+        <label>Product Sale Price ($):</label>
+        <input type="number" id="salePrice" placeholder="Enter sale price">
 
-    <label>Shipping Cost ($)</label>
-    <input type="number" id="shipping" placeholder="Enter shipping cost">
+        <label>Amazon Fees ($):</label>
+        <input type="number" id="amazonFees" placeholder="Enter Amazon fees">
 
-    <label>Amazon FBA Fees ($)</label>
-    <input type="number" id="fba" placeholder="Enter FBA fees">
+        <label>Product Cost ($):</label>
+        <input type="number" id="productCost" placeholder="Enter product cost">
 
-    <label>Other Expenses ($)</label>
-    <input type="number" id="other" placeholder="Enter other expenses">
+        <button onclick="calculateProfit()">Calculate Profit</button>
 
-    <button onclick="calculateProfit()">Calculate Profit</button>
+        <p id="result"></p>
+    </div>
 
-    <div id="result" class="result" style="display:none;"></div>
-</div>
+    <script>
+        function calculateProfit() {
+            let salePrice = parseFloat(document.getElementById('salePrice').value);
+            let amazonFees = parseFloat(document.getElementById('amazonFees').value);
+            let productCost = parseFloat(document.getElementById('productCost').value);
 
-<script>
-    function calculateProfit() {
-        let price = parseFloat(document.getElementById('price').value) || 0;
-        let cost = parseFloat(document.getElementById('cost').value) || 0;
-        let shipping = parseFloat(document.getElementById('shipping').value) || 0;
-        let fba = parseFloat(document.getElementById('fba').value) || 0;
-        let other = parseFloat(document.getElementById('other').value) || 0;
+            if (isNaN(salePrice) || isNaN(amazonFees) || isNaN(productCost)) {
+                document.getElementById('result').innerHTML = "Please enter all values.";
+                return;
+            }
 
-        let totalCost = cost + shipping + fba + other;
-        let profit = price - totalCost;
-        let margin = (profit / price) * 100;
+            let profit = salePrice - amazonFees - productCost;
+            let roi = (profit / productCost) * 100;
 
-        let resultDiv = document.getElementById('result');
-        resultDiv.style.display = 'block';
-
-        if (profit > 0) {
-            resultDiv.style.background = '#28a745'; // Green
-            resultDiv.innerHTML = `Profit: $${profit.toFixed(2)} <br> Margin: ${margin.toFixed(2)}%`;
-        } else {
-            resultDiv.style.background = '#dc3545'; // Red
-            resultDiv.innerHTML = `Loss: $${profit.toFixed(2)} <br> Margin: ${margin.toFixed(2)}%`;
+            document.getElementById('result').innerHTML = 
+                `Profit: $${profit.toFixed(2)} <br> ROI: ${roi.toFixed(2)}%`;
         }
-    }
-</script>
+    </script>
 
 </body>
-</html>
+    </html>
+    
